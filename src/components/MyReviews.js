@@ -3,7 +3,7 @@ import ReviewCard from './ReviewCard'
 
 function MyReviews() {
   const [reviews, setReviews] = useState([])
-  window.sessionStorage.setItem("currentUserId", 38)
+  window.sessionStorage.setItem("currentUserId", 40)
   const currentUserId = parseInt(window.sessionStorage.getItem("currentUserId"))
 
   useEffect(() => {
@@ -11,21 +11,23 @@ function MyReviews() {
     .then(resp => resp.json())
     .then(setReviews)
   }, [currentUserId])
-
-  const reviewCards = reviews.map(review => {
-    return (
-      <ReviewCard 
-        key={review.id}
-        {...review}
-      />
-    )
-  })
-
-  console.log(reviewCards)
   
+  function updateReviews(id, responseObj) {
+    const index = reviews.indexOf(reviews.find(review => review.id === id))
+    const updatedReviews = [...reviews]
+    updatedReviews.splice(index, 1, responseObj)
+    setReviews(updatedReviews)
+  }
+
   return (
     <main className="my-reviews">
-      {reviewCards}
+      {reviews.map(review => (
+        <ReviewCard 
+          key={review.id+review.rating}
+          review={review}
+          updateReviews={updateReviews}
+        />)
+      )}
     </main>
   )
 }

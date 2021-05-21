@@ -21,13 +21,8 @@ code {
 }
 
 .ui.card {
-  width: 14rem;
+  width: 15rem;
   margin: 0;
-}
-
-.ui.card:hover{
-  box-shadow: 1px 1px 4px 3px #d4d4d5;
-  cursor: pointer;
 }
 
 .header.card{
@@ -37,6 +32,20 @@ code {
 .ui.card>.content>.header{
   font-family: Poppins;
 }
+
+
+/* .movie-show-header{
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 0;
+  padding-top: 66.64%;
+  opacity: 75%;
+}
+
+.movie-header-overlay{
+  opacity: 100%;
+} */
 
 
 
