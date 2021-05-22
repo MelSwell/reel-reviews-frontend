@@ -5,10 +5,21 @@ import EditReviewForm from './EditReviewForm'
 
 function ReviewCard({
   review: { id, writtenReview, rating, movie},
-  updateReviews
+  updateReviews,
+  deleteReview
 }) {
   const [open, setOpen] = useState(false)
   const [isEditMode, setIsEditMode] = useState(false)
+
+  const currentUserId = window.sessionStorage.getItem("currentUserId")
+
+  function handleDelete() {
+    fetch(`http://localhost:3000/users/${currentUserId}/reviews/${id}`, {
+      method: 'DELETE'
+    })
+    
+    deleteReview(id)
+  }
   
   return (
     <div className="card-overlay">
@@ -70,6 +81,7 @@ function ReviewCard({
                 Cancel Editting
               </Button>
             )}
+            <Button color='red' onClick={handleDelete}>Delete Review</Button>
           </Modal.Actions>
         </Modal>
       </Card>

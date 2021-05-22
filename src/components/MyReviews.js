@@ -20,13 +20,18 @@ function MyReviews() {
     setReviews(updatedReviews)
   }
 
+  function deleteReview(id) {
+    setReviews(reviews.filter(review => review.id !== id))
+  }
+
   return (
     <main className="my-reviews">
-      {reviews.map((review, idx) => (
+      {reviews.map(review => (
         <ReviewCard 
-          key={review.id+review.rating+idx}
+          key={review.id+review.writtenReview+review.rating}
           review={review}
           updateReviews={updateReviews}
+          deleteReview={deleteReview}
         />)
       )}
     </main>

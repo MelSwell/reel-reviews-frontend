@@ -29,6 +29,7 @@ function EditReviewForm({ id, rating, writtenReview, setIsEditMode, updateReview
     .then((updatedReview) => {
       updateReviews(id, updatedReview)
       setIsEditMode(false)
+      setOpen(true)
     })
   }
 
