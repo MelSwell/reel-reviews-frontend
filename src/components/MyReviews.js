@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Rating } from 'semantic-ui-react'
 import ReviewCard from './ReviewCard'
 
 function MyReviews() {
@@ -12,18 +13,18 @@ function MyReviews() {
     .then(setReviews)
   }, [currentUserId])
   
-  function updateReviews(id, responseObj) {
+  function updateReviews(id, updatedReview) {
     const index = reviews.indexOf(reviews.find(review => review.id === id))
     const updatedReviews = [...reviews]
-    updatedReviews.splice(index, 1, responseObj)
+    updatedReviews.splice(index, 1, updatedReview)
     setReviews(updatedReviews)
   }
 
   return (
     <main className="my-reviews">
-      {reviews.map(review => (
+      {reviews.map((review, idx) => (
         <ReviewCard 
-          key={review.id+review.rating}
+          key={review.id+review.rating+idx}
           review={review}
           updateReviews={updateReviews}
         />)

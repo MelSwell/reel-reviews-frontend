@@ -22,7 +22,15 @@ code {
 
 .ui.card {
   width: 15rem;
-  margin: 0;
+}
+
+.card-overlay {
+  margin: 5px 0 10px 0;
+}
+
+.ui.card:hover{
+  box-shadow: 1px 1px 6px rgba(99, 96, 96, 0.466);
+  cursor: default;
 }
 
 .header.card{
