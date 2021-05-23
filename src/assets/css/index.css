@@ -25,7 +25,7 @@ code {
 }
 
 .card-overlay {
-  margin: 5px 0 10px 0;
+  margin: 5px 5px 10px 5px;
 }
 
 .ui.card:hover{
@@ -41,19 +41,6 @@ code {
   font-family: Poppins;
 }
 
-
-/* .movie-show-header{
-  background-size: contain;
-  background-repeat: no-repeat;
-  width: 100%;
-  height: 0;
-  padding-top: 66.64%;
-  opacity: 75%;
-}
-
-.movie-header-overlay{
-  opacity: 100%;
-} */
 
 
 
