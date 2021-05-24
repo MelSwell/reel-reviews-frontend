@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { Form, Button } from 'semantic-ui-react'
 import SearchResultCard from './SearchResultCard'
+import ReviewCard from './ReviewCard'
 
 
-function Search() {
+function Search({ reviews, updateReviews, deleteReview, addReview }) {
   const [searchTerm, setSearchTerm] = useState("")
   const [searchResults, setSearchResults] = useState([])
 
@@ -13,19 +14,39 @@ function Search() {
     .then(setSearchResults)
   }
 
+  function alreadyReviewed(searchResult) {
+    return reviews.find(review => review.movie.id === searchResult.id)
+  }
+
   let results 
   if (searchResults[0] === "Sorry, we could not find a match. Please try again.") {
     results = <h1>{searchResults[0]}</h1>
   } else {
     results = searchResults.map(result => {
-      return (
-        <SearchResultCard
-          key={result.id}
-          {...result}
-        />
-      )
+      const review = alreadyReviewed(result)
+      if (review) {
+        return (
+          <ReviewCard 
+            key={review.id}
+            review={review}
+            updateReviews={updateReviews}
+            deleteReview={deleteReview}
+            />
+            )
+          } 
+          else {
+            return (
+            <SearchResultCard
+              key={result.id}
+              {...result}
+              addReview={addReview}
+          />
+        )
+      }
     })
   }
+
+  
   
   return (
     <>

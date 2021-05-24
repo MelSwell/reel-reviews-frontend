@@ -43,7 +43,7 @@ function ReviewCard({
         >
           <Modal.Header>Your Review of {movie.title}</Modal.Header>
           <Modal.Content image>
-            <Image size='small' src={movie.posterImg} wrapped />
+            <Image size="medium" src={movie.posterImg} wrapped />
             <Modal.Description>
               {!isEditMode ? (
                 <>

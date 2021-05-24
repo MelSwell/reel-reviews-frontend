@@ -22,6 +22,7 @@ code {
 
 .ui.card {
   width: 15rem;
+  height: 513px;
 }
 
 .card-overlay {
@@ -37,10 +38,41 @@ code {
   text-align: center;
 }
 
+.ui.card > .content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .ui.card>.content>.header{
   font-family: Poppins;
 }
 
+.ui.card > img{
+  height: 315px;
+}
+
+.ui.card>.content>.header:not(.ui), .ui.cards>.card>.content>.header:not(.ui) {
+  font-weight: 700;
+  font-size: inherit;
+  margin-top: -.21425em;
+  line-height: 1.28571429em;
+}
+
+/* .ui.modal>.content>.image {
+  height: 415px;
+  display: flex;
+}
+
+.ui.modal>.content>.image.search-card img{
+  height: 100%;
+  width: 1200px;
+}
+
+.ui.modal>.content>.image img {
+  height: 100%;
+  width: auto;
+} */
 
 
 

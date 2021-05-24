@@ -10,7 +10,8 @@ function SearchResultCard({
   overview,
   releaseDate,
   director,
-  averageTmdbRating, 
+  averageTmdbRating,
+  addReview 
 }) {
   const [open, setOpen] = useState(false)
   const [isReviewMode, setisReviewMode] = useState(false)
@@ -30,7 +31,7 @@ function SearchResultCard({
           <Card.Header className="card">{title}</Card.Header>
         </Card.Content>
         <Card.Content extra>
-          <p>Average Rating: {averageTmdbRating}</p>
+          <p>Average Rating:<br/><span><b>{averageTmdbRating}</b></span></p>
         </Card.Content>
 
         <Modal
@@ -43,7 +44,7 @@ function SearchResultCard({
         >
           <Modal.Header>Overview of {title}</Modal.Header>
           <Modal.Content image>
-            <Image src={posterImg} wrapped />
+            <Image className="search-card" size="medium" src={posterImg} wrapped />
             <Modal.Description>
               {!isReviewMode ? (
               <>
@@ -55,7 +56,7 @@ function SearchResultCard({
                 <p><i>Average Rating: {averageTmdbRating}</i></p>
               </>
               ) : (
-                <CreateReviewForm movieId={id}/>
+                <CreateReviewForm movieId={id} addReview={addReview}/>
               )}
             </Modal.Description>
           </Modal.Content>

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Form, Button, Rating } from 'semantic-ui-react'
 
-function CreateReviewForm({ movieId }) {
+function CreateReviewForm({ movieId, addReview }) {
   const currentUserId = window.sessionStorage.getItem("currentUserId")
   const [formData, setFormData] = useState({
     rating: 1,
@@ -25,6 +25,10 @@ function CreateReviewForm({ movieId }) {
         'Accept': 'application/json'
       },
       body: JSON.stringify(formData)
+    })
+    .then(resp => resp.json())
+    .then(newReview => {
+      addReview(newReview)
     })
   }
 
