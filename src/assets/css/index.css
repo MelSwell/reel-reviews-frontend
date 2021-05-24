@@ -14,7 +14,7 @@ code {
 
 /* MYREVIEWS PAGE STYLES */
 
-.my-reviews {
+.cards-container {
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
@@ -40,6 +40,7 @@ code {
 .ui.card>.content>.header{
   font-family: Poppins;
 }
+
 
 
 

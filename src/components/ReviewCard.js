@@ -30,7 +30,7 @@ function ReviewCard({
         </Card.Content>
         <Card.Content extra>
           <p>My Rating:</p>
-          <Rating icon='star' defaultRating={rating} maxRating={10} disabled />
+          <Rating key={rating} icon='star' defaultRating={rating} maxRating={10} disabled />
         </Card.Content>
       
         <Modal

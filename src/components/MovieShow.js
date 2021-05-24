@@ -19,9 +19,15 @@ function MovieShow() {
   let genres
   let keywords
   if (!isLoading){
-    actors = movie.cast.split(", ").map((actor, idx) => <li key={actor+idx}>{actor}</li>)
-    genres = movie.genres.split(", ").map((g, idx) => <li key={g+idx}>{g}</li>)
-    keywords = movie.keywords.split(", ").map((k, idx) => <li key={k+idx}>{k}</li>)
+    if (movie.cast !== ""){
+      actors = movie.cast.split(", ").map((actor, idx) => <li key={actor+idx}>{actor}</li>)
+    }
+    if (movie.genres !== ""){
+      genres = movie.genres.split(", ").map((g, idx) => <li key={g+idx}>{g}</li>)
+    }
+    if (movie.keywords !== ""){
+      keywords = movie.keywords.split(", ").map((k, idx) => <li key={k+idx}>{k}</li>)
+    }
   }
 
 
@@ -32,7 +38,7 @@ function MovieShow() {
       ) : (
         <div className="movie-show-header">
           <h1>{movie.title}</h1>
-          <iframe 
+          {movie.director !== "none" && <iframe 
           width="560" 
           height="315" 
           src={movie.trailer} 
@@ -41,19 +47,16 @@ function MovieShow() {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
           allowFullScreen
           >
-          </iframe>
+          </iframe>}
           <h3>Plot Summary:</h3>
           <p>{movie.overview}</p>
           <h3>Average Rating:</h3>
           <p>{movie.averageTmdbRating}</p>
           <h3>Directed By:</h3>
-          <p>{movie.director}</p>
-          <h3>Starring:</h3>
-          <ul>{actors}</ul>
-          <h3>Genres:</h3>
-          <ul>{genres}</ul>
-          <h3>Keywords:</h3>
-          <ul>{keywords}</ul>
+          {movie.director !== "none" ? <p>{movie.director}</p> : <p>unknown</p>}
+          {actors !== undefined && <><h3>Starring:</h3><ul>{actors}</ul></>}
+          {genres !== undefined && <><h3>Genres:</h3><ul>{genres}</ul></>}
+          {keywords !== undefined && <><h3>Keywords:</h3><ul>{keywords}</ul></>}
         </div>
       )}
     </div>
@@ -62,9 +65,3 @@ function MovieShow() {
 
 export default MovieShow
 
-{/* <div className="movie-show-header" style={{  backgroundImage: `url(${movie.backdropImg})` }} >
-  <div className="movie-header-overlay">
-    <h1>{movie.title}</h1>
-    <p>{movie.overview}</p>
-  </div>
-</div> */}

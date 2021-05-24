@@ -1,6 +1,7 @@
 import { Switch, Route } from 'react-router-dom'
 import MyReviews from './components/MyReviews'
 import MovieShow from './components/MovieShow'
+import Search from './components/Search'
 
 function App() {
   return (
@@ -11,6 +12,9 @@ function App() {
         </Route>
         <Route path="/movies/:id">
           <MovieShow />
+        </Route>
+        <Route path="/search">
+          <Search />
         </Route>
       </Switch>
     </div>

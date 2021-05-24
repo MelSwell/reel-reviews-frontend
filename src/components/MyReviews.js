@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react'
-import { Rating } from 'semantic-ui-react'
 import ReviewCard from './ReviewCard'
 
 function MyReviews() {
   const [reviews, setReviews] = useState([])
-  window.sessionStorage.setItem("currentUserId", 40)
+  window.sessionStorage.setItem("currentUserId", 39)
   const currentUserId = parseInt(window.sessionStorage.getItem("currentUserId"))
 
   useEffect(() => {
@@ -25,10 +24,10 @@ function MyReviews() {
   }
 
   return (
-    <main className="my-reviews">
+    <main className="cards-container">
       {reviews.map(review => (
         <ReviewCard 
-          key={review.id+review.writtenReview+review.rating}
+          key={review.id}
           review={review}
           updateReviews={updateReviews}
           deleteReview={deleteReview}
