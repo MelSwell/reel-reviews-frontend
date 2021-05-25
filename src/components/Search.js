@@ -1,13 +1,20 @@
-import { useState } from 'react'
+// import { useState } from 'react'
 import { Form, Button } from 'semantic-ui-react'
 import SearchResultCard from './SearchResultCard'
 import ReviewCard from './ReviewCard'
 
 
-function Search({ reviews, updateReviews, deleteReview, addReview }) {
-  const [searchTerm, setSearchTerm] = useState("")
-  const [searchResults, setSearchResults] = useState([])
-
+function Search({ 
+  reviews, 
+  updateReviews, 
+  deleteReview, 
+  addReview,  
+  searchTerm, 
+  setSearchTerm, 
+  searchResults,
+  setSearchResults 
+}) {
+  
   function searchSubmit() {
     fetch(`http://localhost:3000/search?search_term=${searchTerm}`)
     .then(resp => resp.json())

@@ -38,7 +38,7 @@ function MovieShow() {
       ) : (
         <div className="movie-show-header">
           <h1>{movie.title}</h1>
-          {movie.director !== "none" && <iframe 
+          {movie.trailer !== "none" && <iframe 
           width="560" 
           height="315" 
           src={movie.trailer} 

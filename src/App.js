@@ -5,9 +5,11 @@ import MovieShow from './components/MovieShow'
 import Search from './components/Search'
 
 function App() {
-  const [reviews, setReviews] = useState([])
   window.sessionStorage.setItem("currentUserId", 39)
+  const [reviews, setReviews] = useState([])
   const currentUserId = parseInt(window.sessionStorage.getItem("currentUserId"))
+  const [searchTerm, setSearchTerm] = useState("")
+  const [searchResults, setSearchResults] = useState([])
 
   useEffect(() => {
     fetch(`http://localhost:3000/users/${currentUserId}/reviews`)
@@ -21,11 +23,11 @@ function App() {
     updatedReviews.splice(index, 1, updatedReview)
     setReviews(updatedReviews)
   }
-
+  
   function deleteReview(id) {
     setReviews(reviews.filter(review => review.id !== id))
   }
-
+  
   function addReview(newReview){
     setReviews([...reviews, newReview])
   }
@@ -49,6 +51,10 @@ function App() {
             addReview={addReview}
             updateReviews={updateReviews}
             deleteReview={deleteReview}
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            searchResults={searchResults}
+            setSearchResults={setSearchResults}
           />
         </Route>
       </Switch>
