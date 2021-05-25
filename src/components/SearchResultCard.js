@@ -11,6 +11,7 @@ function SearchResultCard({
   releaseDate,
   director,
   averageTmdbRating,
+  tmdbId,
   addReview 
 }) {
   const [open, setOpen] = useState(false)
@@ -80,6 +81,9 @@ function SearchResultCard({
                 Cancel Review
               </Button>
             )}
+            <Link to={`/recommendations/${tmdbId}/${title}`}>
+              <Button color='green'>Get Recommendations!</Button>
+            </Link>
           </Modal.Actions>
         </Modal>
       </Card>

@@ -1,4 +1,3 @@
-// import { useState } from 'react'
 import { Form, Button } from 'semantic-ui-react'
 import SearchResultCard from './SearchResultCard'
 import ReviewCard from './ReviewCard'

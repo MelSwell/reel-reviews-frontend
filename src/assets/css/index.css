@@ -65,4 +65,8 @@ code {
   padding-left: 2em;
 }
 
+.actions > a > .button {
+    margin-left: .75em;
+}
+
 

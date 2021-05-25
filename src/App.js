@@ -3,14 +3,16 @@ import { Switch, Route } from 'react-router-dom'
 import MyReviews from './components/MyReviews'
 import MovieShow from './components/MovieShow'
 import Search from './components/Search'
+import Recommendations from './components/Recommendations'
 
 function App() {
   window.sessionStorage.setItem("currentUserId", 39)
   const [reviews, setReviews] = useState([])
-  const currentUserId = parseInt(window.sessionStorage.getItem("currentUserId"))
   const [searchTerm, setSearchTerm] = useState("")
   const [searchResults, setSearchResults] = useState([])
-
+  
+  const currentUserId = parseInt(window.sessionStorage.getItem("currentUserId"))
+  
   useEffect(() => {
     fetch(`http://localhost:3000/users/${currentUserId}/reviews`)
     .then(resp => resp.json())
@@ -55,6 +57,11 @@ function App() {
             setSearchTerm={setSearchTerm}
             searchResults={searchResults}
             setSearchResults={setSearchResults}
+          />
+        </Route>
+        <Route path="/recommendations/:tmdbId/:movie_title">
+          <Recommendations 
+            addReview={addReview}
           />
         </Route>
       </Switch>

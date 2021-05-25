@@ -81,6 +81,9 @@ function ReviewCard({
                 Cancel Editting
               </Button>
             )}
+            <Link to={`/recommendations/${movie.tmdbId}/${movie.title}`}>
+              <Button color='green'>Get Recommendations!</Button>
+            </Link>
             <Button color='red' onClick={handleDelete}>Delete Review</Button>
           </Modal.Actions>
         </Modal>
