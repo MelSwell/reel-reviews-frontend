@@ -59,21 +59,10 @@ code {
   line-height: 1.28571429em;
 }
 
-/* .ui.modal>.content>.image {
-  height: 415px;
-  display: flex;
+.ui.modal>.content>.image+.description {
+  flex: 0 1 auto;
+  width: inherit;
+  padding-left: 2em;
 }
-
-.ui.modal>.content>.image.search-card img{
-  height: 100%;
-  width: 1200px;
-}
-
-.ui.modal>.content>.image img {
-  height: 100%;
-  width: auto;
-} */
-
-
 
 

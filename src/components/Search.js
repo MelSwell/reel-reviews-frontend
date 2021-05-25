@@ -31,15 +31,14 @@ function Search({ reviews, updateReviews, deleteReview, addReview }) {
             review={review}
             updateReviews={updateReviews}
             deleteReview={deleteReview}
-            />
-            )
-          } 
-          else {
-            return (
-            <SearchResultCard
-              key={result.id}
-              {...result}
-              addReview={addReview}
+          />
+        )
+      } else {
+        return (
+          <SearchResultCard
+            key={result.id}
+            {...result}
+            addReview={addReview}
           />
         )
       }

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Card, Image, Modal, Button, Header } from 'semantic-ui-react'
+import { Card, Image, Modal, Button, Header, Icon } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import CreateReviewForm from './CreateReviewForm'
 
@@ -31,7 +31,11 @@ function SearchResultCard({
           <Card.Header className="card">{title}</Card.Header>
         </Card.Content>
         <Card.Content extra>
-          <p>Average Rating:<br/><span><b>{averageTmdbRating}</b></span></p>
+          <p>
+            Average Rating:<br/>
+            <Icon name="star" color="yellow"/>
+            <span><b>{averageTmdbRating}</b></span>
+          </p>
         </Card.Content>
 
         <Modal
@@ -44,7 +48,7 @@ function SearchResultCard({
         >
           <Modal.Header>Overview of {title}</Modal.Header>
           <Modal.Content image>
-            <Image className="search-card" size="medium" src={posterImg} wrapped />
+            <Image size="medium" src={posterImg} wrapped />
             <Modal.Description>
               {!isReviewMode ? (
               <>
