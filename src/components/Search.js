@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { Form, Button } from 'semantic-ui-react'
 import SearchResultCard from './SearchResultCard'
 import ReviewCard from './ReviewCard'
@@ -13,6 +14,8 @@ function Search({
   searchResults,
   setSearchResults 
 }) {
+  const [reviewedResults, setReviewedResults] = useState([])
+  const [unReviewedResults, setUnReviewedResults] = useState([])
   
   function searchSubmit() {
     fetch(`http://localhost:3000/search?search_term=${searchTerm}`)
@@ -20,39 +23,61 @@ function Search({
     .then(setSearchResults)
   }
 
-  function alreadyReviewed(searchResult) {
-    return reviews.find(review => review.movie.id === searchResult.id)
-  }
+  
+  useEffect(() => {
+    function alreadyReviewed(searchResult) {
+      return reviews.find(review => review.movie.id === searchResult.id)
+    }
 
-  let results 
-  if (searchResults[0] === "Sorry, we could not find a match. Please try again.") {
-    results = <h1>{searchResults[0]}</h1>
-  } else {
-    results = searchResults.map(result => {
-      const review = alreadyReviewed(result)
+    const tempReviewedResults = []
+    const tempUnReviewedResults = []
+
+    function checkIfReviewed(result, callback) {
+      let review = alreadyReviewed(result)
       if (review) {
-        return (
-          <ReviewCard 
-            key={review.id}
-            review={review}
-            updateReviews={updateReviews}
-            deleteReview={deleteReview}
-          />
-        )
+        tempReviewedResults.push(review)
       } else {
-        return (
-          <SearchResultCard
-            key={result.id}
-            {...result}
-            addReview={addReview}
-          />
-        )
+        tempUnReviewedResults.push(result)
       }
+      callback()
+    }
+    
+    let waiting = searchResults.length
+    function finish(){
+      waiting--
+      if (waiting === 0){
+        setReviewedResults([ ...tempReviewedResults])
+        setUnReviewedResults([ ...tempUnReviewedResults])
+      }
+    }
+
+    searchResults.forEach(result => checkIfReviewed(result, finish))
+  }, [searchResults, reviews])
+  
+  let reviewCards
+  if (reviewedResults.length > 0){
+    reviewCards = reviewedResults.map(review => {
+      return (
+        <ReviewCard 
+          key={review.id}
+          review={review}
+          updateReviews={updateReviews}
+          deleteReview={deleteReview}
+        />
+      )
     })
   }
 
-  
-  
+  const searchCards = unReviewedResults.map(result => {
+    return (
+      <SearchResultCard
+        key={result.id}
+        {...result}
+        addReview={addReview}
+      />
+    )
+  })
+
   return (
     <>
       <Form onSubmit={searchSubmit}>
@@ -67,8 +92,18 @@ function Search({
         </Form.Field>
         <Button type='submit'>Submit</Button>
       </Form>
-      <div className="cards-container">
-        {results}
+      <div className="results">
+        <div className="cards-container">
+          {searchCards}
+        </div>
+        {reviewCards && (
+          <>
+            <h1>Results You've Already Reviewed</h1>
+            <div className="cards-container reviewed">
+              {reviewCards}
+            </div>
+          </>
+        )}
       </div>
     </>
   )

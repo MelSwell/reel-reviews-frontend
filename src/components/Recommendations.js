@@ -25,10 +25,12 @@ function Recommendations({ addReview }){
   })
 
   return (
-    <div className="cards-container">
-      <h1>{movie_title}</h1>
-      {results.reverse()}
-    </div>
+    <>
+      <h1>Recommendations based on <i>{movie_title}</i></h1> 
+      <div className="cards-container">
+        {results.reverse()}
+      </div>
+    </>
   )
 }
 

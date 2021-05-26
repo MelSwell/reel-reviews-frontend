@@ -16,8 +16,18 @@ code {
 
 .cards-container {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   flex-wrap: wrap;
+}
+
+.cards-container.reviewed {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.results > h1 {
+  text-align: center;
 }
 
 .ui.card {
@@ -26,7 +36,7 @@ code {
 }
 
 .card-overlay {
-  margin: 5px 5px 10px 5px;
+  margin: 5px 15px 10px 5px;
 }
 
 .ui.card:hover{
