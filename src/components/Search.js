@@ -46,8 +46,8 @@ function Search({
     function finish(){
       waiting--
       if (waiting === 0){
-        setReviewedResults([ ...tempReviewedResults])
-        setUnReviewedResults([ ...tempUnReviewedResults])
+        setReviewedResults(tempReviewedResults)
+        setUnReviewedResults(tempUnReviewedResults)
       }
     }
 
