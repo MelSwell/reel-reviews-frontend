@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import SearchResultCard from './SearchResultCard'
-import ReviewCard from './ReviewCard'
+import ResultsRenderer from './ResultsRenderer'
 
-function Recommendations({ addReview }){
+function Recommendations({ reviews, addReview, updateReviews, deleteReview }){
   const [recommendationResults, setRecommendationResults] = useState([])
   let { tmdbId } = useParams()
   let { movie_title } = useParams()
@@ -14,21 +13,17 @@ function Recommendations({ addReview }){
     .then(setRecommendationResults)
   }, [tmdbId])
 
-  const results = recommendationResults.map(result => {
-    return (
-      <SearchResultCard
-        key={result.id}
-        {...result}
-        addReview={addReview}
-      />
-    )
-  })
-
   return (
     <>
       <h1>Recommendations based on <i>{movie_title}</i></h1> 
-      <div className="cards-container">
-        {results.reverse()}
+      <div className="results">
+        <ResultsRenderer 
+          reviews={reviews}
+          addReview={addReview}
+          updateReviews={updateReviews}
+          deleteReview={deleteReview}
+          recommendationResults={recommendationResults}
+        />
       </div>
     </>
   )

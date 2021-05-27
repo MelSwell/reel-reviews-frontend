@@ -61,7 +61,10 @@ function App() {
         </Route>
         <Route path="/recommendations/:tmdbId/:movie_title">
           <Recommendations 
+            reviews={reviews}
             addReview={addReview}
+            updateReviews={updateReviews}
+            deleteReview={deleteReview}
           />
         </Route>
       </Switch>

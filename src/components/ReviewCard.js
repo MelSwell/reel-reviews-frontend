@@ -73,14 +73,15 @@ function ReviewCard({
               </Button>
             </Link>
             {!isEditMode ? (
-              <Button color='black' onClick={() => setIsEditMode(true)}>
-                Edit Review
-              </Button> 
-            ) : ( 
-              <Button color='black' onClick={() => setIsEditMode(false)}>
-                Cancel Editting
-              </Button>
-            )}
+                <Button color='black' onClick={() => setIsEditMode(true)}>
+                  Edit Review
+                </Button> 
+              ) : ( 
+                <Button color='black' onClick={() => setIsEditMode(false)}>
+                  Cancel Editting
+                </Button>
+              )
+            }
             <Link to={`/recommendations/${movie.tmdbId}/${movie.title}`}>
               <Button color='green'>Get Recommendations!</Button>
             </Link>

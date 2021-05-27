@@ -73,14 +73,15 @@ function SearchResultCard({
               </Button>
             </Link>
             {!isReviewMode ? (
-              <Button color='black' onClick={() => setisReviewMode(true)}>
-                Write a Review
-              </Button>
-            ) : (
-              <Button color="black" onClick={() => setisReviewMode(false)}>
-                Cancel Review
-              </Button>
-            )}
+                <Button color='black' onClick={() => setisReviewMode(true)}>
+                  Write a Review
+                </Button>
+              ) : (
+                <Button color="black" onClick={() => setisReviewMode(false)}>
+                  Cancel Review
+                </Button>
+              )
+            }
             <Link to={`/recommendations/${tmdbId}/${title}`}>
               <Button color='green'>Get Recommendations!</Button>
             </Link>
