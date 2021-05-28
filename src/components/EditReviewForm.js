@@ -6,6 +6,7 @@ function EditReviewForm({ id, rating, writtenReview, setIsEditMode, updateReview
     rating: rating,
     writtenReview: writtenReview
   })
+  const [errors, setErrors] = useState([])
 
   const currentUserId = window.sessionStorage.getItem("currentUserId")
 
@@ -27,15 +28,19 @@ function EditReviewForm({ id, rating, writtenReview, setIsEditMode, updateReview
     })
     .then(resp => resp.json())
     .then((updatedReview) => {
-      updateReviews(id, updatedReview)
-      setIsEditMode(false)
-      setOpen(true)
+      if (updatedReview.id){
+        updateReviews(id, updatedReview)
+        setIsEditMode(false)
+      } else {
+        setErrors(updatedReview)
+      }
     })
   }
 
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Field>
+        {errors && errors.map(e => <p key={e} style={{ color: "red" }}>{e}</p>)}
         <label>Rating: {formData.rating}</label>
         <input
           type='range'

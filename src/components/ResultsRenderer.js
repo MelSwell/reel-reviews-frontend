@@ -30,7 +30,7 @@ function ResultsRenderer({
 
     //the job for the forEach. Calls alreadyReviewed on each result and 
     //pushes movie into appropr. array. Calls on finish() after evaluating each result
-    function checkIfReviewed(result, callback) {
+    function categorizeResult(result, callback) {
       let review = alreadyReviewed(result)
       if (review) {
         tempReviewedResults.push(review)
@@ -58,11 +58,11 @@ function ResultsRenderer({
     }
     
     if (searchResults) {
-      searchResults.forEach(result => checkIfReviewed(result, finish))
+      searchResults.forEach(result => categorizeResult(result, finish))
     }
 
     if (recommendationResults) {
-      recommendationResults.forEach(result => checkIfReviewed(result, finish))
+      recommendationResults.forEach(result => categorizeResult(result, finish))
     }
 
   }, [searchResults, reviews, recommendationResults])
@@ -72,7 +72,7 @@ function ResultsRenderer({
     reviewCards = reviewedResults.map(review => {
       return (
         <ReviewCard 
-          key={review.id}
+          key={review.id+review.movie.id+review.movie.tmdbId}
           review={review}
           updateReviews={updateReviews}
           deleteReview={deleteReview}
@@ -99,7 +99,7 @@ function ResultsRenderer({
   return (
     <>
       <div className="cards-container">
-        {searchCards}
+        {searchResults ? searchCards : searchCards.reverse()}
       </div>
       {reviewCards && (
         <>

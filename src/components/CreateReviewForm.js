@@ -9,6 +9,7 @@ function CreateReviewForm({ movieId, addReview }) {
     movieId: movieId,
     userId: currentUserId
   })
+  const [errors, setErrors] = useState([])
 
   function handleChange(e) {
     setFormData({
@@ -28,13 +29,18 @@ function CreateReviewForm({ movieId, addReview }) {
     })
     .then(resp => resp.json())
     .then(newReview => {
-      addReview(newReview)
+      if (newReview.id) {
+        addReview(newReview)
+      } else {
+        setErrors(newReview)
+      }
     })
   }
 
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Field>
+        {errors && errors.map(e => <p key={e} style={{ color: "red" }}>{e}</p>)}
         <label>Rating: {formData.rating}</label>
         <input
           type='range'
