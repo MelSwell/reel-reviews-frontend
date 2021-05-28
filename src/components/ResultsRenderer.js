@@ -84,11 +84,14 @@ function ResultsRenderer({
   let searchCards
   if (searchResults && searchResults[0] === "Sorry, we could not find a match. Please try again.") {
     searchCards = <h1>{searchResults[0]}</h1>
+  } 
+  else if (recommendationResults && recommendationResults[0] === "Sorry, we could not find any recommendations based on this movie."){
+    searchCards = <h3>{recommendationResults[0]}</h3>
   } else {
     searchCards = unReviewedResults.map(result => {
       return (
         <SearchResultCard
-          key={result.id}
+          key={result.id+result.tmdbId}
           {...result}
           addReview={addReview}
         />
@@ -99,7 +102,7 @@ function ResultsRenderer({
   return (
     <>
       <div className="cards-container">
-        {searchResults ? searchCards : searchCards.reverse()}
+        {recommendationResults && recommendationResults.length > 0 ? searchCards : searchCards.reverse()}
       </div>
       {reviewCards && (
         <>
