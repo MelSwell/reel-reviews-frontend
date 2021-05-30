@@ -14,56 +14,32 @@ function ResultsRenderer({
   const [unReviewedResults, setUnReviewedResults] = useState([])
 
   useEffect(() => {
-    
-    //temporarily hold the categorized movies during the course of forEach loop.
-    //use them to set state at the end of the loop
     const tempReviewedResults = []
     const tempUnReviewedResults = []
-    
-
-    
-    //helper checks if movie is already amongst the user's reviews, 
-    //returns the review object itself when movie is already reviewed
+     
     function alreadyReviewed(searchOrRecResult) {
       return reviews.find(review => review.movie.id === searchOrRecResult.id)
     }
 
-    //the job for the forEach. Calls alreadyReviewed on each result and 
-    //pushes movie into appropr. array. Calls on finish() after evaluating each result
-    function categorizeResult(result, callback) {
+    function categorizeResult(result) {
       let review = alreadyReviewed(result)
       if (review) {
         tempReviewedResults.push(review)
       } else {
         tempUnReviewedResults.push(result)
       }
-      callback()
     }
-    
-    //callback to pass to checkIfReviewed; keeps a count of how many results need 
-    //to still be evaluated, and sets state with temp arrays when there are none left
-    let waiting
+  
     if (searchResults) {
-      waiting = searchResults.length
-    }
-    if (recommendationResults) {
-      waiting = recommendationResults.length
-    }
-    function finish(){
-      waiting--
-      if (waiting === 0){
-        setReviewedResults(tempReviewedResults)
-        setUnReviewedResults(tempUnReviewedResults)
-      }
-    }
-    
-    if (searchResults) {
-      searchResults.forEach(result => categorizeResult(result, finish))
+      searchResults.forEach(result => categorizeResult(result))
     }
 
     if (recommendationResults) {
-      recommendationResults.forEach(result => categorizeResult(result, finish))
+      recommendationResults.forEach(result => categorizeResult(result))
     }
+
+    setReviewedResults(tempReviewedResults)
+    setUnReviewedResults(tempUnReviewedResults)
 
   }, [searchResults, reviews, recommendationResults])
   
@@ -91,7 +67,7 @@ function ResultsRenderer({
     searchCards = unReviewedResults.map(result => {
       return (
         <SearchResultCard
-          key={result.id+result.tmdbId}
+          key={result.tmdbId}
           {...result}
           addReview={addReview}
         />

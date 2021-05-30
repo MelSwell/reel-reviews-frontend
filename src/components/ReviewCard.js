@@ -20,6 +20,14 @@ function ReviewCard({
     
     deleteReview(id)
   }
+
+  let displayDirector
+  if (movie.director === "none"){
+    displayDirector = <p>Director Unknown</p>
+  } else {
+    displayDirector = <p>Directed by {movie.director}</p>
+  }
+
   
   return (
     <div className="card-overlay">
@@ -48,6 +56,8 @@ function ReviewCard({
               {!isEditMode ? (
                 <>
                   <Header>
+                    <p>{movie.releaseDate}</p>
+                    {displayDirector}
                     <Rating icon='star' defaultRating={rating} maxRating={10} disabled />
                     {rating}/10 
                   </Header>
