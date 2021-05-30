@@ -78,7 +78,7 @@ function ResultsRenderer({
   return (
     <>
       <div className="cards-container">
-        {recommendationResults && recommendationResults.length > 0 ? searchCards : searchCards.reverse()}
+        {recommendationResults && recommendationResults.length > 0 ? searchCards.reverse() : searchCards}
       </div>
       {reviewCards && (
         <>

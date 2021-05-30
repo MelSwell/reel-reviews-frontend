@@ -13,6 +13,10 @@ function Recommendations({ reviews, addReview, updateReviews, deleteReview }){
     .then(setRecommendationResults)
   }, [tmdbId])
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [tmdbId])
+
   return (
     <>
       <h1>Recommendations based on <i>{movie_title}</i></h1> 
