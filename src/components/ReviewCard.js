@@ -4,6 +4,7 @@ import { Card, Image, Rating, Modal, Header, Button } from 'semantic-ui-react'
 import EditReviewForm from './EditReviewForm'
 
 function ReviewCard({
+  currentUser,
   review: { id, writtenReview, rating, movie},
   updateReviews,
   deleteReview
@@ -11,10 +12,8 @@ function ReviewCard({
   const [open, setOpen] = useState(false)
   const [isEditMode, setIsEditMode] = useState(false)
 
-  const currentUserId = window.sessionStorage.getItem("currentUserId")
-
   function handleDelete() {
-    fetch(`http://localhost:3000/users/${currentUserId}/reviews/${id}`, {
+    fetch(`http://localhost:3000/users/${currentUser.id}/reviews/${id}`, {
       method: 'DELETE'
     })
     

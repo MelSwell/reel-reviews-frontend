@@ -3,6 +3,7 @@ import ResultsRenderer from './ResultsRenderer'
 
 
 function Search({ 
+  currentUser,
   reviews, 
   updateReviews, 
   deleteReview, 
@@ -37,7 +38,8 @@ function Search({
         <Button type='submit'>Submit</Button>
       </Form>
       <div className="results">
-        <ResultsRenderer 
+        <ResultsRenderer
+          currentUser={currentUser} 
           reviews={reviews}
           updateReviews={updateReviews}
           deleteReview={deleteReview}

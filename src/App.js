@@ -4,20 +4,21 @@ import MyReviews from './components/MyReviews'
 import MovieShow from './components/MovieShow'
 import Search from './components/Search'
 import Recommendations from './components/Recommendations'
+import LoggedOut from './components/LoggedOut'
 
 function App() {
-  window.sessionStorage.setItem("currentUserId", 39)
   const [reviews, setReviews] = useState([])
   const [searchTerm, setSearchTerm] = useState("")
   const [searchResults, setSearchResults] = useState([])
-  
-  const currentUserId = parseInt(window.sessionStorage.getItem("currentUserId"))
+  const [currentUser, setCurrentUser] = useState({})
   
   useEffect(() => {
-    fetch(`http://localhost:3000/users/${currentUserId}/reviews`)
-    .then(resp => resp.json())
-    .then(setReviews)
-  }, [currentUserId])
+    if (currentUser.id) {
+      fetch(`http://localhost:3000/users/${currentUser.id}/reviews`)
+      .then(resp => resp.json())
+      .then(setReviews)
+    }
+  }, [currentUser])
   
   function updateReviews(id, updatedReview) {
     const index = reviews.indexOf(reviews.find(review => review.id === id))
@@ -36,38 +37,45 @@ function App() {
 
   return (
     <div className="App">
-      <Switch>
-        <Route exact path="/">
-          <MyReviews 
-            reviews={reviews}
-            updateReviews={updateReviews}
-            deleteReview={deleteReview}
-          />
-        </Route>
-        <Route path="/movies/:id">
-          <MovieShow />
-        </Route>
-        <Route path="/search">
-          <Search 
-            reviews={reviews}
-            addReview={addReview}
-            updateReviews={updateReviews}
-            deleteReview={deleteReview}
-            searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
-            searchResults={searchResults}
-            setSearchResults={setSearchResults}
-          />
-        </Route>
-        <Route path="/recommendations/:tmdbId/:movie_title">
-          <Recommendations 
-            reviews={reviews}
-            addReview={addReview}
-            updateReviews={updateReviews}
-            deleteReview={deleteReview}
-          />
-        </Route>
-      </Switch>
+      {(!currentUser.id) ? (
+        <LoggedOut setCurrentUser={setCurrentUser} />
+      ) : (
+        <Switch>
+          <Route exact path="/">
+            <MyReviews
+              currentUser={currentUser} 
+              reviews={reviews}
+              updateReviews={updateReviews}
+              deleteReview={deleteReview}
+            />
+          </Route>
+          <Route path="/movies/:id">
+            <MovieShow />
+          </Route>
+          <Route path="/search">
+            <Search
+              currentUser={currentUser} 
+              reviews={reviews}
+              addReview={addReview}
+              updateReviews={updateReviews}
+              deleteReview={deleteReview}
+              searchTerm={searchTerm}
+              setSearchTerm={setSearchTerm}
+              searchResults={searchResults}
+              setSearchResults={setSearchResults}
+            />
+          </Route>
+          <Route path="/recommendations/:tmdbId/:movie_title">
+            <Recommendations
+              currentUser={currentUser} 
+              reviews={reviews}
+              addReview={addReview}
+              updateReviews={updateReviews}
+              deleteReview={deleteReview}
+            />
+          </Route>
+        </Switch>
+      )}
     </div>
   );
 }

@@ -12,12 +12,26 @@ code {
     monospace;
 }
 
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.ui.very.relaxed.two.column.grid > .column {
+  text-align: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
 /* MYREVIEWS PAGE STYLES */
 
 .cards-container {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  min-height: 100vh;
 }
 
 .cards-container.reviewed {

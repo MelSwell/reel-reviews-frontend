@@ -1,10 +1,33 @@
+import { useState } from 'react'
+import { Divider, Grid, Segment, Button } from 'semantic-ui-react'
+import Login from './Login'
+import Register from './Register'
 
+function LoggedOut ({ setCurrentUser }) {
+  const [isLoginMode, setIsLoginMode] = useState(true)
+  const [isRegisterMode, setIsRegisterMode] = useState(false)
 
-function LoggedOut () {
+  function toggleMode() {
+    setIsLoginMode(isLoginMode => !isLoginMode)
+    setIsRegisterMode(isRegisterMode => !isRegisterMode)
+  }
+
   return (
-    <div>
-      <h1>login</h1>
-      <h1>register</h1>
+    <div className="login">
+      <Segment>
+        <Grid columns={2} relaxed='very'>
+          <Grid.Column>
+            {isLoginMode && <Login setCurrentUser={setCurrentUser} />}
+            {isRegisterMode && <Button onClick={toggleMode}>Login</Button>}
+          </Grid.Column>
+          <Grid.Column>
+            {isRegisterMode && <Register setCurrentUser={setCurrentUser}/>}
+            {isLoginMode && <Button onClick={toggleMode}>Register</Button>}
+          </Grid.Column>
+        </Grid>
+
+        <Divider vertical>Or</Divider>
+      </Segment>
     </div>
   )
 }

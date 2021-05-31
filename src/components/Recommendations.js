@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import ResultsRenderer from './ResultsRenderer'
 
-function Recommendations({ reviews, addReview, updateReviews, deleteReview }){
+function Recommendations({ currentUser,reviews, addReview, updateReviews, deleteReview }){
   const [recommendationResults, setRecommendationResults] = useState([])
   let { tmdbId } = useParams()
   let { movie_title } = useParams()
@@ -21,7 +21,8 @@ function Recommendations({ reviews, addReview, updateReviews, deleteReview }){
     <>
       <h1>Recommendations based on <i>{movie_title}</i></h1> 
       <div className="results">
-        <ResultsRenderer 
+        <ResultsRenderer
+          currentUser={currentUser} 
           reviews={reviews}
           addReview={addReview}
           updateReviews={updateReviews}

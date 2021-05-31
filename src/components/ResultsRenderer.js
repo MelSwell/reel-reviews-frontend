@@ -3,6 +3,7 @@ import SearchResultCard from './SearchResultCard'
 import ReviewCard from './ReviewCard'
 
 function ResultsRenderer({
+  currentUser,
   reviews,
   updateReviews, 
   deleteReview, 
@@ -49,6 +50,7 @@ function ResultsRenderer({
       return (
         <ReviewCard 
           key={review.id+review.movie.id+review.movie.tmdbId}
+          currentUser={currentUser}
           review={review}
           updateReviews={updateReviews}
           deleteReview={deleteReview}
