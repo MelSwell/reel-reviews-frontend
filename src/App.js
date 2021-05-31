@@ -5,18 +5,24 @@ import MovieShow from './components/MovieShow'
 import Search from './components/Search'
 import Recommendations from './components/Recommendations'
 import LoggedOut from './components/LoggedOut'
+import Header from './components/Header'
 
 function App() {
   const [reviews, setReviews] = useState([])
   const [searchTerm, setSearchTerm] = useState("")
   const [searchResults, setSearchResults] = useState([])
   const [currentUser, setCurrentUser] = useState({})
+  const [isLoading, setIsLoading] = useState(false)
   
   useEffect(() => {
     if (currentUser.id) {
+      setIsLoading(true)
       fetch(`http://localhost:3000/users/${currentUser.id}/reviews`)
       .then(resp => resp.json())
-      .then(setReviews)
+      .then(reviews => {
+        setReviews(reviews)
+        setIsLoading(false)
+      })
     }
   }, [currentUser])
   
@@ -37,12 +43,14 @@ function App() {
 
   return (
     <div className="App">
+      <Header currentUser={currentUser} setCurrentUser={setCurrentUser}/>
       {(!currentUser.id) ? (
         <LoggedOut setCurrentUser={setCurrentUser} />
       ) : (
         <Switch>
           <Route exact path="/">
             <MyReviews
+              isLoading={isLoading}
               currentUser={currentUser} 
               reviews={reviews}
               updateReviews={updateReviews}

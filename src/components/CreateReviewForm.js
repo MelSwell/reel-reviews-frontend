@@ -53,7 +53,7 @@ function CreateReviewForm({ movieId, addReview }) {
         <br />
         <Rating icon='star' rating={formData.rating} maxRating={10} />
       </Form.Field>
-      <Form.Field>
+      <Form.Field className="form-review">
         <label>Your Review</label>
         <textarea 
           cols="75"

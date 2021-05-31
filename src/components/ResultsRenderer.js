@@ -48,7 +48,8 @@ function ResultsRenderer({
   if (reviewedResults.length > 0){
     reviewCards = reviewedResults.map(review => {
       return (
-        <ReviewCard 
+        <ReviewCard
+          className="reviwed-result" 
           key={review.id+review.movie.id+review.movie.tmdbId}
           currentUser={currentUser}
           review={review}
@@ -79,17 +80,19 @@ function ResultsRenderer({
 
   return (
     <>
-      <div className="cards-container">
-        {recommendationResults && recommendationResults.length > 0 ? searchCards.reverse() : searchCards}
-      </div>
       {reviewCards && (
-        <>
-          <h1>Results you've already reviewed</h1>
+        <div className="reviewed-container">
+          <div className="reviewed header">
+            <h1>You've already reviewed:</h1>
+          </div>
           <div className="cards-container reviewed">
             {reviewCards}
           </div>
-        </>
+        </div> 
       )}
+      <div className="cards-container">
+        {searchCards}
+      </div>
     </>
   )
 }

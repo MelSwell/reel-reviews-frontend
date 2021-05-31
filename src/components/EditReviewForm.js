@@ -53,7 +53,7 @@ function EditReviewForm({ id, rating, writtenReview, setIsEditMode, updateReview
         <br />
         <Rating icon='star' rating={formData.rating} maxRating={10} />
       </Form.Field>
-      <Form.Field>
+      <Form.Field className="form-review">
         <label>Your Review</label>
         <textarea 
           cols="75"
