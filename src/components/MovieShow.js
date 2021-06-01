@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import { Icon, Segment, Label } from 'semantic-ui-react'
+import LoaderSpinner from './LoaderSpinner'
 
 function MovieShow() {
   const [movie, setMovie] = useState("")
@@ -15,51 +17,89 @@ function MovieShow() {
     })
   }, [id])
 
-  let actors
-  let genres
   let keywords
-  if (!isLoading){
-    if (movie.cast !== ""){
-      actors = movie.cast.split(", ").map((actor, idx) => <li key={actor+idx}>{actor}</li>)
-    }
-    if (movie.genres !== ""){
-      genres = movie.genres.split(", ").map((g, idx) => <li key={g+idx}>{g}</li>)
-    }
-    if (movie.keywords !== ""){
-      keywords = movie.keywords.split(", ").map((k, idx) => <li key={k+idx}>{k}</li>)
-    }
+  if (!isLoading) {
+    keywords = movie.keywords.split(", ").map((kw, idx) => {
+      return (
+        <Label key={kw+idx}>
+          {kw}
+        </Label>
+      )
+    })
   }
 
 
   return (
-    <div className="movie-show-container">
+    <>
       {isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        <div className="movie-show-header">
-          <h1>{movie.title}</h1>
-          {movie.trailer !== "none" && <iframe 
-          width="560" 
-          height="315" 
-          src={movie.trailer} 
-          title="YouTube video player" 
-          frameBorder="0" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-          allowFullScreen
-          >
-          </iframe>}
-          <h3>Plot Summary:</h3>
-          <p>{movie.overview}</p>
-          <h3>Average Rating:</h3>
-          <p>{movie.averageTmdbRating}</p>
-          <h3>Directed By:</h3>
-          {movie.director !== "none" ? <p>{movie.director}</p> : <p>unknown</p>}
-          {actors !== undefined && <><h3>Starring:</h3><ul>{actors}</ul></>}
-          {genres !== undefined && <><h3>Genres:</h3><ul>{genres}</ul></>}
-          {keywords !== undefined && <><h3>Keywords:</h3><ul>{keywords}</ul></>}
-        </div>
-      )}
-    </div>
+        <LoaderSpinner />
+        ) : (
+          <div className="movie-show-container">
+            <div className="movie-show-header">
+              <div className="movie-header-backdrop">
+                <img className="movie-backdrop" src={movie.backdropImg} alt={`${movie.title} background`} />
+              </div>
+              <div className="background-image-overlay"></div>
+              <div className="movie-header-overlay">
+                <div className="movie-poster">
+                  <img src={movie.posterImg} alt={`${movie.title} poster`} />
+                </div>
+                <div className="movie-header-details">
+                  <div className="movie-title">
+                    <h1>{movie.title} ({movie.releaseDate})</h1>
+                  </div>
+                  <div className="movie-rating">
+                    <h3>Average Rating: <Icon name="star" size="small" color="yellow"/>{movie.averageTmdbRating}</h3>
+                  </div>
+                  <div className="movie-director">
+                    <h3>Directed By: {movie.director !== "none" ? `${movie.director}` : 'unknown'}</h3>
+                  </div>
+                  {movie.cast !== "" ? (
+                    <div className="movie-cast">
+                      <h3>Starring: </h3>
+                      <p><i>{movie.cast}</i></p>
+                    </div> 
+                  ) : (
+                    null
+                  )}
+                  <div className="movie-summary">
+                    <h3>Plot Summary:</h3>
+                    <p>{movie.overview}</p>
+                  </div>
+                  {movie.genres !== "" ? (
+                    <div className="movie-genres">
+                      <h3>Genres: </h3>
+                      <p><i>{movie.genres}</i></p>
+                    </div>
+                  ) : (
+                    null
+                  )}
+                </div>
+              </div>
+            </div>
+            <div className="movie-show-details">
+              {movie.trailer !== "none" && (
+                <iframe 
+                width="560" 
+                height="315" 
+                src={movie.trailer} 
+                title="YouTube video player" 
+                frameBorder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowFullScreen
+                >
+                </iframe>
+              )}
+              <Segment className="movie-keywords">
+                <div className="keywords-inner">
+                  <h5>Keywords:</h5>
+                  {movie.keywords !== "" ? <>{keywords}</> : <h3>None Found</h3>}
+                </div>
+              </Segment>
+            </div>
+          </div>
+        )}
+      </>
     )
 }
 

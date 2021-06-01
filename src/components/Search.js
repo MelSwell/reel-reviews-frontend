@@ -16,6 +16,7 @@ function Search({
   setSearchResults 
 }) {
   const [isLoading, setIsLoading] = useState(false)
+  const [searchHeader, setSearchHeader] = useState(searchTerm)
   
   function searchSubmit() {
     if (searchTerm.length > 0) {
@@ -24,6 +25,7 @@ function Search({
       .then(resp => resp.json())
       .then(results => {
         setSearchResults(results)
+        setSearchHeader(searchTerm)
         setIsLoading(false)
       })
     }
@@ -54,7 +56,8 @@ function Search({
             </Form>
           </div>
           <div className="results">
-            {searchResults.length > 0 && <h1>Results for <i>{searchTerm}</i></h1>}
+            {(typeof searchResults[0] !== 'string' && searchResults.length > 0) 
+              && <h1>Results for <i>{searchHeader}</i></h1>}
             <ResultsRenderer
               currentUser={currentUser} 
               reviews={reviews}

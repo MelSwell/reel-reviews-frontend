@@ -12,6 +12,7 @@ code {
     monospace;
 }
 
+
 /* HEADER STYLES */
 
 header {
@@ -28,6 +29,14 @@ header {
   margin: 0 5px;
   color: rgba(118, 124, 30, 0.842);
   font-weight: 600;
+}
+
+header > img {
+  padding-left: 1.15%;
+}
+
+header > .nav-menu {
+  padding-right: 1.15%;
 }
 
 /* LOGIN PAGE STYLES */
@@ -160,3 +169,110 @@ header {
 .field.form-review > textarea:not([rows]) {
   height: 11.5rem;
 }
+
+/* MOVIE SHOW PAGE STYLES */
+.movie-show-container{
+  margin: 10px 10px;
+}
+
+.movie-show-header {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 10px 0; 
+}
+
+.movie-header-backdrop {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  max-height: 500px;
+  overflow: hidden;
+}
+
+.movie-header-backdrop > img {
+  width: 100%;
+  opacity: 60%;
+}
+
+.movie-header-overlay{
+  position: absolute;
+  z-index: 1;
+  padding: 5px;
+  height: 100%;
+  width: 100%;
+  color: white;
+  text-shadow:
+     -1px -1px 0 #000,  
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+       1px 1px 0 #000;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  
+}
+
+.movie-header-details {
+  width: 65%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.background-image-overlay{
+  position: absolute;
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(46, 60, 60, 0.35);
+}
+
+.movie-poster {
+  height: 75%;
+  width: 22%;
+  max-width: 202px;
+}
+
+.movie-poster > img {
+  width: 100%;
+  height: 100%;
+}
+
+.movie-cast > h3, .movie-summary > h3, .movie-genres > h3 {
+  margin-bottom: auto;
+  margin-top: 14px;
+}
+
+.movie-show-details {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.movie-show-details > iframe {
+  margin-bottom: 10px;
+}
+
+.segment.movie-keywords {
+  min-height: 315px;
+  align-self: baseline;
+  width: 30%;
+  margin-top: 0;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.keywords-inner > .label {
+  margin-bottom: 3px;
+}
+
+
+
