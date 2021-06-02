@@ -34,7 +34,8 @@ function MovieShow({ reviews, currentUser, addReview, updateReviews, deleteRevie
   
   let movieShowReviews
   if (!isLoading) {
-    movieShowReviews = movie.reviews.map(review => {
+    const sortedReviews = [...movie.reviews].sort((rev_a, rev_b) => rev_b.id - rev_a.id )
+    movieShowReviews = sortedReviews.map(review => {
       return (
         <MovieShowReview 
           key={review.id}

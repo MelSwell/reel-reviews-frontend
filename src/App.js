@@ -6,6 +6,7 @@ import Search from './components/Search'
 import Recommendations from './components/Recommendations'
 import LoggedOut from './components/LoggedOut'
 import Header from './components/Header'
+import UserShow from './components/UserShow'
 
 function App() {
   const [reviews, setReviews] = useState([])
@@ -38,7 +39,11 @@ function App() {
   }
   
   function addReview(newReview){
-    setReviews([newReview, ...reviews])
+    if (reviews.length > 0) {
+      setReviews([newReview, ...reviews])
+    } else {
+      setReviews([newReview])
+    }
   }
 
   return (
@@ -86,6 +91,11 @@ function App() {
               addReview={addReview}
               updateReviews={updateReviews}
               deleteReview={deleteReview}
+            />
+          </Route>
+          <Route path="/users/:id/reviews">
+            <UserShow 
+              currentUser={currentUser}
             />
           </Route>
         </Switch>

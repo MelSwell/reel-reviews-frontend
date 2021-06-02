@@ -15,33 +15,42 @@ function ResultsRenderer({
   const [unReviewedResults, setUnReviewedResults] = useState([])
 
   useEffect(() => {
-    const tempReviewedResults = []
-    const tempUnReviewedResults = []
-     
-    function alreadyReviewed(searchOrRecResult) {
-      return reviews.find(review => review.movie.id === searchOrRecResult.id)
-    }
+    if (reviews.length > 0){
+      const tempReviewedResults = []
+      const tempUnReviewedResults = []
+      
+      function alreadyReviewed(searchOrRecResult) {
+        return reviews.find(review => review.movie.id === searchOrRecResult.id)
+      }
 
-    function categorizeResult(result) {
-      let review = alreadyReviewed(result)
-      if (review) {
-        tempReviewedResults.push(review)
-      } else {
-        tempUnReviewedResults.push(result)
+      function categorizeResult(result) {
+        let review = alreadyReviewed(result)
+        if (review) {
+          tempReviewedResults.push(review)
+        } else {
+          tempUnReviewedResults.push(result)
+        }
+      }
+    
+      if (searchResults) {
+        searchResults.forEach(result => categorizeResult(result))
+      }
+
+      if (recommendationResults) {
+        recommendationResults.forEach(result => categorizeResult(result))
+      }
+
+      setReviewedResults(tempReviewedResults)
+      setUnReviewedResults(tempUnReviewedResults)
+    } else {
+      if (searchResults) {
+        setUnReviewedResults(searchResults)
+      }
+
+      if (recommendationResults) {
+        setUnReviewedResults(recommendationResults)
       }
     }
-  
-    if (searchResults) {
-      searchResults.forEach(result => categorizeResult(result))
-    }
-
-    if (recommendationResults) {
-      recommendationResults.forEach(result => categorizeResult(result))
-    }
-
-    setReviewedResults(tempReviewedResults)
-    setUnReviewedResults(tempUnReviewedResults)
-
   }, [searchResults, reviews, recommendationResults])
   
   let reviewCards

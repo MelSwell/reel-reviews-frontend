@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Segment, Item, Rating, Button } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 import EditReviewForm from './EditReviewForm'
 
 function MovieShowReview({ 
@@ -27,7 +28,11 @@ function MovieShowReview({
     <Segment>
       <Item>
         <Item.Content>
-          <Item.Header>{username}</Item.Header>
+          <Item.Header>
+            <Link to={isUsers ? "/" : `/users/${userId}/reviews`}> 
+              {username}
+            </Link>
+          </Item.Header>
           {!isEditMode && 
             <Item.Meta><Rating key={rating} icon='star' defaultRating={rating} maxRating={10} disabled /></Item.Meta>
           }

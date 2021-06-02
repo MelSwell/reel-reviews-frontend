@@ -5,12 +5,13 @@ import EditReviewForm from './EditReviewForm'
 
 function ReviewCard({
   currentUser,
-  review: { id, writtenReview, rating, movie},
+  review: { id, writtenReview, rating, movie, userId, username},
   updateReviews,
   deleteReview
 }) {
   const [open, setOpen] = useState(false)
   const [isEditMode, setIsEditMode] = useState(false)
+  const [isUsers,] = useState(currentUser.id === userId)
 
   function handleDelete() {
     fetch(`http://localhost:3000/users/${currentUser.id}/reviews/${id}`, {
@@ -36,7 +37,7 @@ function ReviewCard({
           <Card.Header className="card">{movie.title}</Card.Header>
         </Card.Content>
         <Card.Content extra>
-          <p>My Rating:</p>
+          <p>{isUsers ? 'My Rating:' : `${username}'s Rating:`}</p>
           <Rating key={rating} icon='star' defaultRating={rating} maxRating={10} disabled />
         </Card.Content>
       
@@ -48,7 +49,7 @@ function ReviewCard({
             <Button color='black'>View</Button>
           }
         >
-          <Modal.Header>Your Review of {movie.title}</Modal.Header>
+          <Modal.Header>{isUsers ? "Your" : `${username}'s`} Review of {movie.title}</Modal.Header>
           <Modal.Content image>
             <Image size="medium" src={movie.posterImg} wrapped />
             <Modal.Description>
@@ -81,20 +82,24 @@ function ReviewCard({
                 View Movie Details
               </Button>
             </Link>
-            {!isEditMode ? (
-                <Button color='black' onClick={() => setIsEditMode(true)}>
-                  Edit Review
-                </Button> 
-              ) : ( 
-                <Button color='black' onClick={() => setIsEditMode(false)}>
-                  Cancel Editting
-                </Button>
-              )
+            {isUsers &&
+              <>
+                {!isEditMode ? (
+                    <Button color='black' onClick={() => setIsEditMode(true)}>
+                      Edit Review
+                    </Button> 
+                  ) : ( 
+                    <Button color='black' onClick={() => setIsEditMode(false)}>
+                      Cancel Editting
+                    </Button>
+                  )
+                }
+              </>
             }
             <Link to={`/recommendations/${movie.tmdbId}/${movie.title}`}>
               <Button color='green'>Get Recommendations!</Button>
             </Link>
-            <Button color='red' onClick={handleDelete}>Delete Review</Button>
+            {isUsers && <Button color='red' onClick={handleDelete}>Delete Review</Button>}
           </Modal.Actions>
         </Modal>
       </Card>
