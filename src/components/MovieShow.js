@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-import { Icon, Segment, Label } from 'semantic-ui-react'
+import { useParams, Link } from 'react-router-dom'
+import { Icon, Segment, Label, Button, Item } from 'semantic-ui-react'
 import LoaderSpinner from './LoaderSpinner'
+import MovieShowReview from './MovieShowReview'
+import CreateReviewForm from './CreateReviewForm'
 
-function MovieShow() {
+function MovieShow({ reviews, currentUser, addReview, updateReview, deleteReview }) {
   const [movie, setMovie] = useState("")
   const [isLoading, setIsLoading] = useState(true)
+  const [isReviewedByUser, setIsReviewedByUser] = useState(false)
   let { id } = useParams()
   
   useEffect(() => {
@@ -14,8 +17,9 @@ function MovieShow() {
     .then((movie) => {
       setMovie(movie)
       setIsLoading(false)
+      setIsReviewedByUser(movie.reviews.some(r => r.userId === currentUser.id))
     })
-  }, [id])
+  }, [id, reviews, currentUser])
 
   let keywords
   if (!isLoading) {
@@ -27,7 +31,19 @@ function MovieShow() {
       )
     })
   }
-
+  
+  let movieShowReviews
+  if (!isLoading) {
+    movieShowReviews = movie.reviews.map(review => {
+      return (
+        <MovieShowReview 
+          key={review.id}
+          {...review}
+          currentUser={currentUser}
+        />
+      )
+    })
+  }
 
   return (
     <>
@@ -74,6 +90,11 @@ function MovieShow() {
                   ) : (
                     null
                   )}
+                  <div className="recommendations-button">
+                    <Link to={`/recommendations/${movie.tmdbId}/${movie.title}`}>
+                      <Button color='green'>Get Recommendations!</Button>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
@@ -96,6 +117,17 @@ function MovieShow() {
                   {movie.keywords !== "" ? <>{keywords}</> : <h3>None Found</h3>}
                 </div>
               </Segment>
+              {!isReviewedByUser && (
+                <div className="movie-show-reviews">
+                  <CreateReviewForm movieId={movie.id} addReview={addReview}/>
+                </div>
+              )}
+              { movie.reviews.length > 0 &&
+                <Item.Group className="movie-show-reviews">
+                  <h3>Reviews:</h3>
+                  {movieShowReviews}
+                </Item.Group>
+              }
             </div>
           </div>
         )}

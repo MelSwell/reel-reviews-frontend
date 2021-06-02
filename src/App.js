@@ -38,7 +38,7 @@ function App() {
   }
   
   function addReview(newReview){
-    setReviews([...reviews, newReview])
+    setReviews([newReview, ...reviews])
   }
 
   return (
@@ -58,7 +58,13 @@ function App() {
             />
           </Route>
           <Route path="/movies/:id">
-            <MovieShow />
+            <MovieShow 
+              reviews={reviews}
+              currentUser={currentUser}
+              addReview={addReview}
+              updateReviews={updateReviews}
+              deleteReview={deleteReview}
+            />
           </Route>
           <Route path="/search">
             <Search

@@ -249,10 +249,15 @@ header > .nav-menu {
   margin-top: 14px;
 }
 
+.movie-header-details > .recommendations-button {
+  margin-top: 5px;
+}
+
 .movie-show-details {
   display: flex;
   align-items: center;
   justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 .movie-show-details > iframe {
@@ -274,5 +279,27 @@ header > .nav-menu {
   margin-bottom: 3px;
 }
 
+.movie-show-reviews {
+  width: 65%;
+}
 
+.movie-show-reviews > .ui.form {
+  margin-bottom: 10px;
+}  
 
+.items > .segment {
+  margin: 0;
+}
+
+.ui.items:last-child{
+  margin-bottom: 10px!important;
+}
+
+.segment > .item > .content > .meta {
+  margin-bottom: 5px;
+}
+
+.segment > .item > .content > .description {
+  margin-bottom: 5px;
+  font-size: 1.15em;
+}
