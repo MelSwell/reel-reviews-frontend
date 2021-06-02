@@ -1,18 +1,50 @@
 import { useState } from 'react'
 import { Segment, Item, Rating, Button } from 'semantic-ui-react'
+import EditReviewForm from './EditReviewForm'
 
-function MovieShowReview({ id, rating, writtenReview, username, userId, currentUser }) {
+function MovieShowReview({ 
+  id, 
+  rating, 
+  writtenReview, 
+  username, 
+  userId, 
+  currentUser, 
+  updateReviews,
+  deleteReview
+}) {
   const [isUsers,] = useState(userId === currentUser.id)
   const [isEditMode, setIsEditMode] = useState(false)
+
+  function handleDelete() {
+    fetch(`http://localhost:3000/users/${currentUser.id}/reviews/${id}`, {
+      method: 'DELETE'
+    })
+    
+    deleteReview(id)
+  }
 
   return (
     <Segment>
       <Item>
         <Item.Content>
           <Item.Header>{username}</Item.Header>
-          <Item.Meta><Rating key={rating} icon='star' defaultRating={rating} maxRating={10} disabled /></Item.Meta>
+          {!isEditMode && 
+            <Item.Meta><Rating key={rating} icon='star' defaultRating={rating} maxRating={10} disabled /></Item.Meta>
+          }
           <Item.Description>
-            {writtenReview}
+            {!isEditMode ? (
+              <>
+                {writtenReview}
+              </>
+            ) : (
+              <EditReviewForm 
+                id={id}
+                rating={rating}
+                writtenReview={writtenReview}
+                setIsEditMode={setIsEditMode}
+                updateReviews={updateReviews}
+              />
+            )}  
           </Item.Description>
           {isUsers && (
             <Item.Extra>
@@ -25,6 +57,7 @@ function MovieShowReview({ id, rating, writtenReview, username, userId, currentU
                   Cancel Editting
                 </Button>
               )}
+              <Button color='red' onClick={handleDelete}>Delete Review</Button>
             </Item.Extra>
           )}
         </Item.Content>

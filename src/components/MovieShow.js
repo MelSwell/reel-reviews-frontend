@@ -5,7 +5,7 @@ import LoaderSpinner from './LoaderSpinner'
 import MovieShowReview from './MovieShowReview'
 import CreateReviewForm from './CreateReviewForm'
 
-function MovieShow({ reviews, currentUser, addReview, updateReview, deleteReview }) {
+function MovieShow({ reviews, currentUser, addReview, updateReviews, deleteReview }) {
   const [movie, setMovie] = useState("")
   const [isLoading, setIsLoading] = useState(true)
   const [isReviewedByUser, setIsReviewedByUser] = useState(false)
@@ -40,6 +40,8 @@ function MovieShow({ reviews, currentUser, addReview, updateReview, deleteReview
           key={review.id}
           {...review}
           currentUser={currentUser}
+          updateReviews={updateReviews}
+          deleteReview={deleteReview}
         />
       )
     })
