@@ -56,6 +56,17 @@ header > .nav-menu {
 }
 /* MYREVIEWS PAGE STYLES */
 
+.filter-controls {
+  justify-content: space-around;
+  display: flex;
+  width: 100%;
+  padding-top: 10px;
+}
+
+.filter-controls > .input {
+  width: 50%
+}
+
 .cards-container {
   display: flex;
   justify-content: center;
