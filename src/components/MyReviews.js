@@ -22,25 +22,30 @@ function MyReviews({
 
   let sortedReviews
   if (reviews.length > 0) {
-    if (sortTerm === "default") {
-      sortedReviews = [...filteredReviews]
-    }
-    if (sortTerm ==="oldest") {
-      sortedReviews = [...filteredReviews].sort((rev_a, rev_b) => rev_a.id - rev_b.id)
-    }
-    if (sortTerm === "year asc") {
-      sortedReviews = [...filteredReviews].sort((rev_a, rev_b) => rev_a.movie.releaseDate - rev_b.movie.releaseDate)
-    }
-    if (sortTerm === "year desc") {
-      sortedReviews = [...filteredReviews].sort((rev_a, rev_b) => rev_b.movie.releaseDate - rev_a.movie.releaseDate)
-    }
-    if (sortTerm === "rating asc") {
-      sortedReviews = [...filteredReviews].sort((rev_a, rev_b) => rev_a.rating - rev_b.rating)
-    }
-    if (sortTerm === "rating desc") {
-      sortedReviews = [...filteredReviews].sort((rev_a, rev_b) => rev_b.rating - rev_a.rating)
+    switch (sortTerm) {
+      case "default":
+        sortedReviews = [...filteredReviews]
+        break;
+      case "oldest": 
+        sortedReviews = [...filteredReviews].sort((rev_a, rev_b) => rev_a.id - rev_b.id)
+        break;
+      case "year asc":
+        sortedReviews = [...filteredReviews].sort((rev_a, rev_b) => rev_a.movie.releaseDate - rev_b.movie.releaseDate)
+        break;
+      case "year desc": 
+        sortedReviews = [...filteredReviews].sort((rev_a, rev_b) => rev_b.movie.releaseDate - rev_a.movie.releaseDate)
+        break;
+      case "rating asc": 
+        sortedReviews = [...filteredReviews].sort((rev_a, rev_b) => rev_a.rating - rev_b.rating)
+        break;
+      case "rating desc":
+        sortedReviews = [...filteredReviews].sort((rev_a, rev_b) => rev_b.rating - rev_a.rating)
+        break;
+      default:
+        sortedReviews = [...filteredReviews]
     }
   }
+  
   
   let reviewCards
   if (reviews.length > 0) {
