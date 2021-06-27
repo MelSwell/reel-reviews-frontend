@@ -11,8 +11,6 @@ function ReviewsFilter({ sortTerm, setSortTerm, filterTerm, setFilterTerm }) {
     { key: 'rating desc', value: 'rating desc', text: 'Rating(Desc)' }
   ]
 
-  const value = sortTerm
-
   function handleChange(e, { value }){ 
     setSortTerm(value)
   }
@@ -27,7 +25,7 @@ function ReviewsFilter({ sortTerm, setSortTerm, filterTerm, setFilterTerm }) {
         onChange={handleChange}
         selection
         options={sortOptions}
-        value={value}
+        value={sortTerm}
       />
     </div>
   )
