@@ -1,70 +1,33 @@
-# Getting Started with Create React App
+# ReelReviews
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a movie review app with a search and recommendations feature. You have full CRUD over your reviews. You can also use the search feature to search for new movies to review by title. Each movie comes with a recommendations button, as well as a show page where you can find more details about the film. This was my capstone project for Flatiron School. The app is best run on a desktop cmoputer with a screen at least 800 pixels wide.
 
-## Available Scripts
+## Installation
 
-In the project directory, you can run:
+1) Clone this repository to your machine
+2) In the project directory, run `npm install`
+3) Clone the [backend repo](https://github.com/MelSwell/reel-reviews-backend) to your machine and follow those instructions
+4) Ensure that you have succesfully started the Rails server
+5) Run `npm start` 
 
-### `yarn start`
+## Usage
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Create a user account or login with an existing account from the seeds
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+New users will not have any reviewed movies associated with them; use the search feature to find movies to review
 
-### `yarn test`
+To write a new review, simply click the 'View' button on the chosen search result card to pull up a modal with more options
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To manage/view your reviews, go to the 'My Reviews' page. From here, click the 'View' button on any of your reviews to pull up a modal with more options
 
-### `yarn build`
+All movies come with a details page and a 'Get Recommendations' button
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Troubleshooting & Notes
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+When you first start using the app, the search and recommendations features may run a little slowly. This is because for each result, the server makes an additional six or seven calls to the TMDB API in order to collect the necessary movie data. Because of this, the server will check to see if the result already exists in the database and forego making calls to TMDB if it does. The database, therefore, grows as you use the app, resulting in faster fulfillment of requests over time. 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+As of this writing, there is no functionality to reset your password. 
 
-### `yarn eject`
+## Acknowledgments
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The app makes use of numerous [TMDB API](https://developers.themoviedb.org/3/getting-started/introduction) endpoints
