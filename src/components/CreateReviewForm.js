@@ -19,7 +19,7 @@ function CreateReviewForm({ movieId, addReview }) {
   }
 
   function handleSubmit() {
-    fetch(`http://localhost:3000/users/${currentUserId}/reviews`, {
+    fetch(process.env.REACT_APP_BASE_API_URL + `users/${currentUserId}/reviews`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

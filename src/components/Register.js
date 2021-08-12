@@ -21,7 +21,7 @@ function Register({ setCurrentUser }) {
   }
 
   function handleSubmit() {
-    fetch('http://localhost:3000/users', {
+    fetch(process.env.REACT_APP_BASE_API_URL + 'users', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -18,7 +18,7 @@ function EditReviewForm({ id, rating, writtenReview, setIsEditMode, updateReview
   }
 
   function handleSubmit(){
-    fetch(`http://localhost:3000/users/${currentUserId}/reviews/${id}`, {
+    fetch(process.env.REACT_APP_BASE_API_URL + `users/${currentUserId}/reviews/${id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',

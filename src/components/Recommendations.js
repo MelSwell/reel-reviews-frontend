@@ -11,7 +11,7 @@ function Recommendations({ currentUser,reviews, addReview, updateReviews, delete
   
   useEffect(() => {
     setIsLoading(true)
-    fetch(`http://localhost:3000/recommendations?tmdb_id=${tmdbId}`)
+    fetch(process.env.REACT_APP_BASE_API_URL + `recommendations?tmdb_id=${tmdbId}`)
     .then(resp => resp.json())
     .then(recommendations => {
       setRecommendationResults(recommendations)

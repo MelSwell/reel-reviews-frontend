@@ -21,7 +21,7 @@ function Search({
   function searchSubmit() {
     if (searchTerm.length > 0) {
       setIsLoading(true)
-      fetch(`http://localhost:3000/search?search_term=${searchTerm}`)
+      fetch(process.env.REACT_APP_BASE_API_URL + `search?search_term=${searchTerm}`)
       .then(resp => resp.json())
       .then(results => {
         setSearchResults(results)

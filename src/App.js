@@ -18,7 +18,7 @@ function App() {
   useEffect(() => {
     if (currentUser.id) {
       setIsLoading(true)
-      fetch(`http://localhost:3000/users/${currentUser.id}/reviews`)
+      fetch(process.env.REACT_APP_BASE_API_URL + `users/${currentUser.id}/reviews`)
       .then(resp => resp.json())
       .then(reviews => {
         setReviews(reviews)

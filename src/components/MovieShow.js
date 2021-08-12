@@ -12,7 +12,7 @@ function MovieShow({ reviews, currentUser, addReview, updateReviews, deleteRevie
   let { id } = useParams()
   
   useEffect(() => {
-    fetch(`http://localhost:3000/movies/${id}`)
+    fetch(process.env.REACT_APP_BASE_API_URL + `movies/${id}`)
     .then(resp => resp.json())
     .then((movie) => {
       setMovie(movie)

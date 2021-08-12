@@ -11,7 +11,7 @@ function UserShow({ currentUser }) {
 
   useEffect(() => {
     setIsLoading(true)
-    fetch(`http://localhost:3000/users/${id}/reviews`)
+    fetch(process.env.REACT_APP_BASE_API_URL + `users/${id}/reviews`)
     .then(resp => resp.json())
     .then(reviews => {
       setUsersReviews(reviews)

@@ -17,7 +17,7 @@ function MovieShowReview({
   const [isEditMode, setIsEditMode] = useState(false)
 
   function handleDelete() {
-    fetch(`http://localhost:3000/users/${currentUser.id}/reviews/${id}`, {
+    fetch(process.env.REACT_APP_BASE_API_URL + `users/${currentUser.id}/reviews/${id}`, {
       method: 'DELETE'
     })
     

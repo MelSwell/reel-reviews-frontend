@@ -14,7 +14,7 @@ function ReviewCard({
   const [isUsers,] = useState(currentUser.id === userId)
 
   function handleDelete() {
-    fetch(`http://localhost:3000/users/${currentUser.id}/reviews/${id}`, {
+    fetch(process.env.REACT_APP_BASE_API_URL + `users/${currentUser.id}/reviews/${id}`, {
       method: 'DELETE'
     })
     
