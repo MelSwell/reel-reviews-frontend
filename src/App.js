@@ -14,6 +14,7 @@ function App() {
   const [searchResults, setSearchResults] = useState([])
   const [currentUser, setCurrentUser] = useState({})
   const [isLoading, setIsLoading] = useState(false)
+  const token = window.localStorage.getItem("token")
   
   useEffect(() => {
     if (currentUser.id) {
@@ -26,6 +27,21 @@ function App() {
       })
     }
   }, [currentUser])
+
+  useEffect(() => {
+    if (token) {
+      setIsLoading(true)
+      fetch(process.env.REACT_APP_BASE_API_URL + '/auto-login', {
+        headers: {
+          'Authorization': `Bearer ${window.localStorage.getItem("token")}`
+        }
+      })
+      .then(resp => resp.json())
+      .then(user => {
+        setCurrentUser(user)
+      })
+    }
+  }, [token])
   
   function updateReviews(id, updatedReview) {
     const index = reviews.indexOf(reviews.find(review => review.id === id))
@@ -49,7 +65,7 @@ function App() {
   return (
     <div className="App">
       <Header currentUser={currentUser} setCurrentUser={setCurrentUser}/>
-      {(!currentUser.id) ? (
+      {(!token) ? (
         <LoggedOut setCurrentUser={setCurrentUser} />
       ) : (
         <Switch>

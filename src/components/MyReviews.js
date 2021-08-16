@@ -75,12 +75,11 @@ function MyReviews({
             setSortTerm={setSortTerm}
           />
           <main className="cards-container">
-            {reviews.length > 0 ? (
-              <>{reviewCards}</>
+            {!currentUser.id && <LoaderSpinner />}
+            {reviews.error ? (
+              <h1 className="welcome">You haven't reviews any movies yet. Try searching for a movie on the search page!</h1> 
               ) : (
-                <h1 className="welcome">
-                You haven't reviewed any movies yet. Head over to the search page and get reviewin'!
-              </h1>
+              reviewCards
             )}
           </main>
         </>

@@ -30,9 +30,10 @@ function Login({ setCurrentUser }) {
     })
     .then(resp => resp.json())
     .then(data => {
-      if (data.id) {
-        setCurrentUser(data)
-        window.sessionStorage.setItem("currentUserId", data.id)
+      if (data.token) {
+        setCurrentUser(data.user)
+        window.sessionStorage.setItem("currentUserId", data.user.id)
+        window.localStorage.setItem("token", data.token)
         history.push("/")
       } else {
         setErrors(data)

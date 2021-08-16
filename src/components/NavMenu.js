@@ -2,6 +2,8 @@ import { NavLink } from 'react-router-dom'
 
 function NavMenu({ setCurrentUser }) {
   function handleLogout() {
+    window.sessionStorage.removeItem("currentUserId")
+    window.localStorage.removeItem("token")
     setCurrentUser({})
   }
 
