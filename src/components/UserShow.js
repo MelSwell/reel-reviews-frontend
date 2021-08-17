@@ -15,7 +15,7 @@ function UserShow({ currentUser }) {
     .then(resp => resp.json())
     .then(reviews => {
       setUsersReviews(reviews)
-      fetch(`http://localhost:3000/users/${id}`)
+      fetch(process.env.REACT_APP_BASE_API_URL + `users/${id}`)
       .then(resp => resp.json())
       .then(user => {
         setUsername(user.username)
