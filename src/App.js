@@ -39,6 +39,7 @@ function App() {
       .then(resp => resp.json())
       .then(user => {
         setCurrentUser(user)
+        window.sessionStorage.setItem("currentUserId", user.id)
       })
     }
   }, [token])
