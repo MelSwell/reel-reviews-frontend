@@ -317,3 +317,19 @@ header > .nav-menu {
 .user-show-header {
   text-align: center;
 }
+
+@media only screen and (max-width: 799px) {
+  .movie-header-overlay {
+    position: relative;
+    color: black;
+    text-shadow: none;
+  }
+
+  .background-image-overlay {
+    display: none;
+  }
+
+  .segment.movie-keywords {
+    width: auto
+  }
+}
